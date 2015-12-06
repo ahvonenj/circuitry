@@ -97,6 +97,10 @@ Circuitry.prototype.update = function(dt)
 	this.g.lineStyle(3, 0x000000, 1);
 	this.g.beginFill(0xFF0000, 1);
 	this.g.drawCircle(self.px, self.py, 20);
+	this.g.drawCircle(self.px + Math.cos(Math.cos(20) * self.t.time / 300) * -80, self.py + Math.sin(Math.sin(20) * self.t.time / 300) * -80, 15);
+	this.g.drawCircle(self.px + Math.cos(Math.cos(40) * self.t.time / 350) * -70, self.py + Math.sin(Math.sin(40) * self.t.time / 350) * -70, 10);
+	this.g.drawCircle(self.px + Math.cos(Math.cos(60) * self.t.time / 375) * -60, self.py + Math.sin(Math.sin(60) * self.t.time / 375) * -60, 5);
+	this.g.drawCircle(self.px + Math.cos(Math.cos(80) * self.t.time / 400) * -50, self.py + Math.sin(Math.sin(80) * self.t.time / 400) * -50, 25);
 	this.g.endFill();
 }
 
