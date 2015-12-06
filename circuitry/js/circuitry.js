@@ -19,7 +19,8 @@ function Circuitry($container)
 	this.renderer = new PIXI.WebGLRenderer(this._WZ.w, this._WZ.h,
 	{
 		backgroundColor: 0x1E824C,
-		antialias: true
+		antialias: true,
+		autoResize: true
 	});
 
 	this.$container.append(this.renderer.view);
