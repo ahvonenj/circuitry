@@ -29,6 +29,24 @@ function Circuitry($container)
 	this.g = new PIXI.Graphics();
 	this.stage.addChild(this.g);
 
+	self.style = 
+	{
+	    font : 'bold 50px Arial',
+	    fill : '#FFFFFF',
+	    stroke : '#000000',
+	    strokeThickness : 6,
+	    dropShadow : false,
+	    dropShadowColor : '#000000',
+	    dropShadowAngle : Math.PI / 4,
+	    dropShadowDistance : 6
+	};
+
+	self.richText = new PIXI.Text('circuitry', self.style);
+	self.richText.x = self._WZ.w / 2 - self.richText.width / 2;
+	self.richText.y = self._WZ.h / 2 - self.richText.height / 2;
+
+	self.stage.addChild(self.richText);
+
 	this.px = 100;
 	this.py = 100;
 
@@ -71,13 +89,13 @@ Circuitry.prototype.update = function(dt)
 {
 	var self = this;
 
-	self.px = 200 + Math.cos(self.t.time / 200) * 100;
-	self.py = 200 + Math.sin(self.t.time / 200) * 100;
+	self.px = self._WZ.w / 2 + Math.cos(self.t.time / 300) * 300;
+	self.py = self._WZ.h / 2 + Math.sin(self.t.time / 300) * 300;
 
 	self.g.clear();
 	this.g.lineStyle(3, 0x000000, 1);
 	this.g.beginFill(0xFF0000, 1);
-	this.g.drawCircle(self.px, self.py, 25);
+	this.g.drawCircle(self.px, self.py, 20);
 	this.g.endFill();
 }
 
