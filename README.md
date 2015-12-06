@@ -1,8 +1,8 @@
 ![](https://github.com/ahvonenj/circuitry/blob/master/circ.png?raw=true)
 
-2D "circuit" simulator.
+Circuitry is a 2D "circuit" simulator
 
-Trying to make something similar to:
+It tries to be / become something similar, but standalone, to:
 
 - Minecraft's redstone system
 - Garry's mods wiremod
