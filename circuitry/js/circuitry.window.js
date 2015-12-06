@@ -15,6 +15,17 @@ function CWindow(stage, x, y, width, height, title, contentscript)
 
 	this.g = new PIXI.Graphics();
 	this.stage.addChild(this.g);
+
+	this.style = 
+	{
+	    font : '14px Arial',
+	    fill : '#FFFFFF',
+	    stroke : '#000000',
+	    strokeThickness : 0
+	};
+
+	this.titleg = new PIXI.Text(this.title, this.style)
+	this.stage.addChild(this.titleg);
 }
 
 CWindow.prototype.update = function(dt, time)
@@ -24,11 +35,14 @@ CWindow.prototype.update = function(dt, time)
 
 	this.x = 100 + Math.sin(time / 300) * 100;
 	this.y = 100 + Math.sin(time / 300) * 100;
+
+	this.titleg.x = this.x + 5;
+	this.titleg.y = this.y + this.titleg.height / 2;
 }
 
 CWindow.prototype.draw = function(dt)
 {
-	this.g.clear();
+	//this.g.clear();
 
 	// Draw window
 	this.g.lineStyle(2, 0x000000, 1);
