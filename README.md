@@ -1,5 +1,7 @@
 # circuitry
 
+![](https://github.com/ahvonenj/circuitry/blob/master/circ.png?raw=true)
+
 2D "circuit" simulator.
 
 Trying to make something similar to:
