@@ -27,11 +27,6 @@ function Circuitry($container)
 	this.stage = new PIXI.Container();
 
 	this.g = new PIXI.Graphics();
-	this.g.lineStyle(2, 0xFF0000, 1);
-	this.g.beginFill(0xFF0000, 1);
-	this.g.drawCircle(100, 100, 100);
-	this.g.endFill();
-
 	this.stage.addChild(this.g);
 
 	this.px = 100;
