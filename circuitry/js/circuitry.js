@@ -27,6 +27,11 @@ function Circuitry($container)
 
 	this.stage = new PIXI.Container();
 
+
+	// INTERACTION
+	this.interaction = this.renderer.plugins.interaction;
+
+
 	this.g = new PIXI.Graphics();
 	this.stage.addChild(this.g);
 
@@ -50,6 +55,10 @@ function Circuitry($container)
 
 	this.px = 100;
 	this.py = 100;
+
+	this.grid = new CGrid(50, 50, this.$container, this.stage);
+
+	this.stage.swapChildren(this.g, this.grid.g)
 
 
 	// TIMING
@@ -90,6 +99,15 @@ Circuitry.prototype.update = function(dt)
 {
 	var self = this;
 
+	this.grid.update(dt, this.interaction);
+}
+
+Circuitry.prototype.render = function(dt)
+{
+	var self = this;
+
+	this.grid.draw(dt);
+
 	self.px = self._WZ.w / 2 + Math.cos(self.t.time / 300) * 300;
 	self.py = self._WZ.h / 2 + Math.sin(self.t.time / 300) * 300;
 
@@ -106,11 +124,6 @@ Circuitry.prototype.update = function(dt)
 	this.g.beginFill(0xf39c12, 1);
 	this.g.drawCircle(self.px + Math.cos(Math.cos(80) * self.t.time / 400) * -50, self.py + Math.sin(Math.sin(80) * self.t.time / 400) * -50, 25);
 	this.g.endFill();
-}
-
-Circuitry.prototype.render = function(dt)
-{
-	var self = this;
 
 	self.renderer.render(self.stage);
 }
