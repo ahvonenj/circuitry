@@ -8,6 +8,8 @@ function Circuitry($container)
 		return false;
 	}
 
+	this.debug = true;
+
 	this.$container = $container;
 
 	this._WZ =
@@ -51,7 +53,8 @@ function Circuitry($container)
 	self.richText.x = self._WZ.w / 2 - self.richText.width / 2;
 	self.richText.y = self._WZ.h / 2 - self.richText.height / 2;
 
-	//self.stage.addChild(self.richText);
+	if(self.debug)
+		self.stage.addChild(self.richText);
 
 	this.px = 100;
 	this.py = 100;
@@ -61,7 +64,6 @@ function Circuitry($container)
 	this.testwindow = new CWindow(this.stage, 100, 100, 400, 300, "Test window", function(g) { console.log('t')});
 
 	this.stage.swapChildren(this.g, this.grid.g)
-	//this.stage.swapChildren(this.grid.g, this.testwindow.g)
 
 
 	// TIMING
@@ -116,22 +118,26 @@ Circuitry.prototype.render = function(dt)
 	this.grid.draw(dt);
 	this.testwindow.draw(dt);
 
-	/*self.px = self._WZ.w / 2 + Math.cos(self.t.time / 300) * 300;
-	self.py = self._WZ.h / 2 + Math.sin(self.t.time / 300) * 300;
 
-	self.g.clear();
-	this.g.lineStyle(3, 0x000000, 1);
-	this.g.beginFill(0xc0392b, 1);
-	this.g.drawCircle(self.px, self.py, 20);
-	this.g.beginFill(0x2980b9, 1);
-	this.g.drawCircle(self.px + Math.cos(Math.cos(20) * self.t.time / 300) * -80, self.py + Math.sin(Math.sin(20) * self.t.time / 300) * -80, 15);
-	this.g.beginFill(0xd35400, 1);
-	this.g.drawCircle(self.px + Math.cos(Math.cos(40) * self.t.time / 350) * -70, self.py + Math.sin(Math.sin(40) * self.t.time / 350) * -70, 10);
-	this.g.beginFill(0x8e44ad, 1);
-	this.g.drawCircle(self.px + Math.cos(Math.cos(60) * self.t.time / 375) * -60, self.py + Math.sin(Math.sin(60) * self.t.time / 375) * -60, 5);
-	this.g.beginFill(0xf39c12, 1);
-	this.g.drawCircle(self.px + Math.cos(Math.cos(80) * self.t.time / 400) * -50, self.py + Math.sin(Math.sin(80) * self.t.time / 400) * -50, 25);
-	this.g.endFill();*/
+	if(self.debug)
+	{
+		self.px = self._WZ.w / 2 + Math.cos(self.t.time / 300) * 300;
+		self.py = self._WZ.h / 2 + Math.sin(self.t.time / 300) * 300;
+
+		self.g.clear();
+		this.g.lineStyle(3, 0x000000, 1);
+		this.g.beginFill(0xc0392b, 1);
+		this.g.drawCircle(self.px, self.py, 20);
+		this.g.beginFill(0x2980b9, 1);
+		this.g.drawCircle(self.px + Math.cos(Math.cos(20) * self.t.time / 300) * -80, self.py + Math.sin(Math.sin(20) * self.t.time / 300) * -80, 15);
+		this.g.beginFill(0xd35400, 1);
+		this.g.drawCircle(self.px + Math.cos(Math.cos(40) * self.t.time / 350) * -70, self.py + Math.sin(Math.sin(40) * self.t.time / 350) * -70, 10);
+		this.g.beginFill(0x8e44ad, 1);
+		this.g.drawCircle(self.px + Math.cos(Math.cos(60) * self.t.time / 375) * -60, self.py + Math.sin(Math.sin(60) * self.t.time / 375) * -60, 5);
+		this.g.beginFill(0xf39c12, 1);
+		this.g.drawCircle(self.px + Math.cos(Math.cos(80) * self.t.time / 400) * -50, self.py + Math.sin(Math.sin(80) * self.t.time / 400) * -50, 25);
+		this.g.endFill();
+	}
 
 	self.renderer.render(self.stage);
 }
