@@ -51,14 +51,17 @@ function Circuitry($container)
 	self.richText.x = self._WZ.w / 2 - self.richText.width / 2;
 	self.richText.y = self._WZ.h / 2 - self.richText.height / 2;
 
-	self.stage.addChild(self.richText);
+	//self.stage.addChild(self.richText);
 
 	this.px = 100;
 	this.py = 100;
 
 	this.grid = new CGrid(50, 50, this.$container, this.stage);
 
+	this.testwindow = new CWindow(this.stage, 100, 100, 400, 300, "Test window", function(g) { console.log('t')});
+
 	this.stage.swapChildren(this.g, this.grid.g)
+	//this.stage.swapChildren(this.grid.g, this.testwindow.g)
 
 
 	// TIMING
@@ -70,6 +73,9 @@ function Circuitry($container)
 		step: 1/60,
 		time: 0
 	}
+
+	this.events = new CEvents();
+	this.bindKeys();
 
 	this.step();
 	return this;
@@ -100,6 +106,7 @@ Circuitry.prototype.update = function(dt)
 	var self = this;
 
 	this.grid.update(dt, this.interaction);
+	this.testwindow.update(dt, self.t.time);
 }
 
 Circuitry.prototype.render = function(dt)
@@ -107,8 +114,9 @@ Circuitry.prototype.render = function(dt)
 	var self = this;
 
 	this.grid.draw(dt);
+	this.testwindow.draw(dt);
 
-	self.px = self._WZ.w / 2 + Math.cos(self.t.time / 300) * 300;
+	/*self.px = self._WZ.w / 2 + Math.cos(self.t.time / 300) * 300;
 	self.py = self._WZ.h / 2 + Math.sin(self.t.time / 300) * 300;
 
 	self.g.clear();
@@ -123,7 +131,12 @@ Circuitry.prototype.render = function(dt)
 	this.g.drawCircle(self.px + Math.cos(Math.cos(60) * self.t.time / 375) * -60, self.py + Math.sin(Math.sin(60) * self.t.time / 375) * -60, 5);
 	this.g.beginFill(0xf39c12, 1);
 	this.g.drawCircle(self.px + Math.cos(Math.cos(80) * self.t.time / 400) * -50, self.py + Math.sin(Math.sin(80) * self.t.time / 400) * -50, 25);
-	this.g.endFill();
+	this.g.endFill();*/
 
 	self.renderer.render(self.stage);
+}
+
+Circuitry.prototype.bindKeys = function()
+{
+	window.addEventListener('keypress', this.events.keypress);
 }
