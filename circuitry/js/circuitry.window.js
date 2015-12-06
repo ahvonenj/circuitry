@@ -21,6 +21,9 @@ CWindow.prototype.update = function(dt, time)
 {
 	this.width = 400 + Math.cos(time / 300) * 100;
 	this.height = 400 + Math.sin(time / 300) * 100;
+
+	this.x = 100 + Math.sin(time / 300) * 100;
+	this.y = 100 + Math.sin(time / 300) * 100;
 }
 
 CWindow.prototype.draw = function(dt)
