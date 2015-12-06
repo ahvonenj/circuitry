@@ -30,11 +30,11 @@ function CWindow(stage, x, y, width, height, title, contentscript)
 
 CWindow.prototype.update = function(dt, time)
 {
-	this.width = 400 + Math.cos(time / 300) * 100;
-	this.height = 400 + Math.sin(time / 300) * 100;
+	this.width = 400 + Math.cos(time / 600) * 100;
+	this.height = 400 + Math.sin(time / 600) * 100;
 
-	this.x = 100 + Math.sin(time / 300) * 100;
-	this.y = 100 + Math.sin(time / 300) * 100;
+	this.x = 100 + Math.sin(time / 600) * 100;
+	this.y = 100 + Math.sin(time / 600) * 100;
 
 	this.titleg.x = this.x + 5;
 	this.titleg.y = this.y + this.titleg.height / 2;
