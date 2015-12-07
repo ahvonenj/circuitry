@@ -6,13 +6,31 @@ function CEvents(circuitry)
 CEvents.prototype.keypress = function(e)
 {
 	var self = this;
+	var key = String.fromCharCode(event.keyCode).toLowerCase(); // Evaluate keycode into a lowercase human-readable letter
 
-	//k = this.circuitry.t.time
-	//this.circuitry.testwindow.x = CUtils.lerp(this.circuitry.testwindow.x, 300, (this.circuitry.t.time - k);
-	
-	CLerp.doLerp(this.circuitry.testwindow.x, 300, 500, function(l)
+	switch(key)
 	{
-		self.circuitry.testwindow.x = l;
-	});
-	//console.log(CUtils.lerp2(this.circuitry.testwindow.x, 300, 5));
+		case 'e':
+			if(!self.circuitry.componentwindow.isopen)
+			{
+				self.circuitry.componentwindow.isopen = true;
+
+				CLerp.doLerp(self.circuitry.componentwindow.x, self.circuitry._WZ.w - self.circuitry.componentwindow.width, 350, function(l)
+				{
+					self.circuitry.componentwindow.x = l;
+				});
+			}
+			else
+			{
+				self.circuitry.componentwindow.isopen = false;
+				
+				CLerp.doLerp(self.circuitry.componentwindow.x, self.circuitry._WZ.w, 350, function(l)
+				{
+					self.circuitry.componentwindow.x = l;
+				});
+			}
+			break;
+		default:
+			break;
+	}
 }
