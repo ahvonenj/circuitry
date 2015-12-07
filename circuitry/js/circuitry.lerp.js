@@ -37,8 +37,6 @@ var CLerp =
 				self.lerps.splice(i, 1);
 				continue;
 			}
-
-			
 		}
 	},
 
