@@ -34,7 +34,6 @@ var CLerp =
 
 			if(ct >= 1)
 			{
-				console.log(ct, lr)
 				self.lerps.splice(i, 1);
 				continue;
 			}
@@ -52,7 +51,6 @@ var CLerp =
 			if(lerp.id !== null && lerp.id === lerptointerrupt)
 			{
 				this.lerps.splice(i, 1);
-				console.log('INTERRUPTED ' + lerptointerrupt);
 				break;
 			}
 			else
