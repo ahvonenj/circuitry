@@ -5,13 +5,15 @@ var CUtils =
   		return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
 	},
 
-	lerp: function(v0, v1, t) 
+	sineBetween: function(min, max, t)
 	{
-  		return (1 - t) * v0 + t * v1;
+	    var halfRange = (max - min) / 2;
+	    return min + halfRange + Math.sin(t) * halfRange;
 	},
 
-	lerp2: function(v0, v1, t) 
+	cosineBetween: function(min, max, t)
 	{
-		return v0 + t * (v1 - v0);
+	    var halfRange = (max - min) / 2;
+	    return min + halfRange + Math.cos(t) * halfRange;
 	}
 }
