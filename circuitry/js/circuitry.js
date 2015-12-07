@@ -9,6 +9,7 @@ function Circuitry($container)
 	}
 
 	this.debug = true;
+	this.version = '0.1';
 
 	this.$container = $container;
 
@@ -34,39 +35,32 @@ function Circuitry($container)
 	this.interaction = this.renderer.plugins.interaction;
 
 
+	// INIT CIRCUITRY LOGO THING
 	this.g = new PIXI.Graphics();
 	this.stage.addChild(this.g);
-
-	self.style = 
-	{
-	    font : 'bold 50px Arial',
-	    fill : '#FFFFFF',
-	    stroke : '#000000',
-	    strokeThickness : 6,
-	    dropShadow : false,
-	    dropShadowColor : '#000000',
-	    dropShadowAngle : Math.PI / 4,
-	    dropShadowDistance : 6
-	};
-
-	self.richText = new PIXI.Text('circuitry', self.style);
-	self.richText.x = self._WZ.w / 2 - self.richText.width / 2;
-	self.richText.y = self._WZ.h / 2 - self.richText.height / 2;
-
-	if(self.debug)
-		self.stage.addChild(self.richText);
 
 	this.px = 100;
 	this.py = 100;
 
+
+	// BUBBLEGUM
+	self.doShamefulStuff();
+
+
+	// INIT COMPONENT GRID
 	this.grid = new CGrid(50, 50, this.$container, this.stage);
 
-	this.componentwindow = new CWindow(this.stage, this._WZ.w, 0, 400, this._WZ.h, "Test window", function(w) 
+
+	// INIT COMPONENT WINDOW
+	this.componentwindow = new CWindow(this.stage, this._WZ.w, 0, 400, this._WZ.h, "Circuitry component window", function(w) 
 	{ 
 		w.g.drawRect(w.x + 50, w.y + 50, 60, 50);
 	}, false);
 
-	this.stage.swapChildren(this.g, this.grid.g)
+
+	// Z SWAP
+	this.stage.swapChildren(this.g, this.grid.g);
+	//this.stage.swapChildren(this.componentwindow.g, this.richText);
 
 
 	// TIMING
@@ -152,4 +146,44 @@ Circuitry.prototype.render = function(dt)
 Circuitry.prototype.bindKeys = function()
 {
 	window.addEventListener('keypress', this.events.keypress);
+}
+
+Circuitry.prototype.doShamefulStuff = function()
+{
+	var self = this;
+
+	var st = 
+	{
+	    font : 'bold 50px Arial',
+	    fill : '#FFFFFF',
+	    stroke : '#000000',
+	    strokeThickness : 6,
+	    dropShadow : false,
+	    dropShadowColor : '#000000',
+	    dropShadowAngle : Math.PI / 4,
+	    dropShadowDistance : 6
+	};
+
+	self.richText = new PIXI.Text('circuitry', st);
+	self.richText.x = self._WZ.w / 2 - self.richText.width / 2;
+	self.richText.y = self._WZ.h / 2 - self.richText.height / 2;
+
+	if(self.debug)
+		self.stage.addChild(self.richText);
+
+	st = 
+	{
+	    font : 'bold 14px Arial',
+	    fill : '#FFFFFF',
+	    stroke : '#000000',
+	    strokeThickness : 2
+	};
+
+	self.keyText = new PIXI.Text('circuitry v' + self.version + '\n\n' +
+								'E - toggle component window\n' +
+								'H - toggle this text', st);
+	self.keyText.x = 5;
+	self.keyText.y = 5;
+
+	self.stage.addChild(self.keyText);
 }
