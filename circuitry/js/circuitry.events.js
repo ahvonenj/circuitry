@@ -6,7 +6,7 @@ function CEvents(circuitry)
 CEvents.prototype.keypress = function(e)
 {
 	var self = this;
-	var key = String.fromCharCode(event.keyCode).toLowerCase(); // Evaluate keycode into a lowercase human-readable letter
+	var key = String.fromCharCode(e.keyCode).toLowerCase(); // Evaluate keycode into a lowercase human-readable letter
 
 	switch(key)
 	{
