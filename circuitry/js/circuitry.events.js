@@ -32,6 +32,25 @@ CEvents.prototype.keypress = function(e)
 				}, 'componentwindow_close');
 			}
 			break;
+		case 'h':
+			if(self.circuitry.keyText.alpha > 0.5)
+			{
+				CLerp.interrupt('show_helptex');
+				CLerp.doLerp(self.circuitry.keyText.alpha, 0, 250, function(l)
+				{
+					self.circuitry.keyText.alpha = l;
+				}, 'hide_helptext');
+			}
+			else
+			{
+				CLerp.interrupt('hide_helptext');
+				CLerp.doLerp(self.circuitry.keyText.alpha, 1, 250, function(l)
+				{
+					self.circuitry.keyText.alpha = l;
+				}, 'show_helptext');
+			}
+			
+			break;
 		default:
 			break;
 	}
