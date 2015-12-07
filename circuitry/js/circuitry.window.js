@@ -16,6 +16,7 @@ function CWindow(stage, x, y, width, height, title, contentscript, closebutton)
 	this.closebutton = closebutton;
 
 	this.visible = true;
+	this.isopen = false;
 
 	this.g = new PIXI.Graphics();
 	this.stage.addChild(this.g);

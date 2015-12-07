@@ -61,7 +61,7 @@ function Circuitry($container)
 
 	this.grid = new CGrid(50, 50, this.$container, this.stage);
 
-	this.testwindow = new CWindow(this.stage, 0, this._WZ.h - 350, this._WZ.w, 350, "Test window", function(w) 
+	this.componentwindow = new CWindow(this.stage, this._WZ.w, 0, 400, this._WZ.h, "Test window", function(w) 
 	{ 
 		w.g.drawRect(w.x + 50, w.y + 50, 60, 50);
 	}, false);
@@ -115,7 +115,7 @@ Circuitry.prototype.update = function(dt)
 	CLerp.updateOngoingLerps(dt);
 
 	this.grid.update(dt, this.interaction);
-	this.testwindow.update(dt, self.t.time);
+	this.componentwindow.update(dt, self.t.time);
 }
 
 Circuitry.prototype.render = function(dt)
@@ -123,7 +123,7 @@ Circuitry.prototype.render = function(dt)
 	var self = this;
 
 	this.grid.draw(dt);
-	this.testwindow.draw(dt);
+	this.componentwindow.draw(dt);
 
 
 	if(self.debug)
