@@ -3,9 +3,11 @@ var CLerp =
 	time: 0, // Program / game elapsed time
 	lerps: [],
 
-	doLerp: function(v0, v1, t, f)
+	doLerp: function(v0, v1, t, f, id)
 	{
 		var self = this;
+
+		var id = id || null;
 
 		this.lerps.push(
 		{
@@ -13,7 +15,8 @@ var CLerp =
 			v1: v1,
 			t: t,
 			st: self.time,
-			f: f
+			f: f,
+			id: id
 		});
 	},
 
@@ -37,6 +40,25 @@ var CLerp =
 			}
 
 			
+		}
+	},
+
+	interrupt: function(lerptointerrupt)
+	{
+		for(var i = 0; i < this.lerps.length; i++)
+		{
+			var lerp = this.lerps[i];
+
+			if(lerp.id !== null && lerp.id === lerptointerrupt)
+			{
+				this.lerps.splice(i, 1);
+				console.log('INTERRUPTED ' + lerptointerrupt);
+				break;
+			}
+			else
+			{
+				continue;
+			}
 		}
 	},
 
