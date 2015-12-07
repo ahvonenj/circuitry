@@ -5,7 +5,6 @@ function CGrid(rx, ry, $container, stage, renderer)
 	this.$container = $container;
 	this.stage = stage;
 
-
 	this.rx = rx || 50;
 	this.ry = ry || 50;
 
@@ -29,8 +28,8 @@ CGrid.prototype.update = function(dt, interaction)
 	{
 		self.selected = 
 		{
-			x: Math.floor(mx / this.wx),
-			y: Math.floor(my / this.wy)
+			x: Math.floor(mx / self.wx),
+			y: Math.floor(my / self.wy)
 		}
 	}
 	else
