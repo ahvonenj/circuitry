@@ -61,7 +61,10 @@ function Circuitry($container)
 
 	this.grid = new CGrid(50, 50, this.$container, this.stage);
 
-	this.testwindow = new CWindow(this.stage, 100, 100, 400, 300, "Test window", function(g) { console.log('t')});
+	this.testwindow = new CWindow(this.stage, 0, this._WZ.h - 350, this._WZ.w, 350, "Test window", function(w) 
+	{ 
+		w.g.drawRect(w.x + 50, w.y + 50, 60, 50);
+	}, false);
 
 	this.stage.swapChildren(this.g, this.grid.g)
 
@@ -76,7 +79,7 @@ function Circuitry($container)
 		time: 0
 	}
 
-	this.events = new CEvents();
+	this.events = new CEvents(this);
 	this.bindKeys();
 
 	this.step();
@@ -99,6 +102,8 @@ Circuitry.prototype.step = function()
 	self.render(self.t.dt);
 
 	self.t.time += (self.t.now - self.t.last);
+	CLerp.time = self.t.time;
+
 	self.t.last = self.t.now; 
 	requestAnimationFrame(this.step.bind(self));
 }
@@ -106,6 +111,8 @@ Circuitry.prototype.step = function()
 Circuitry.prototype.update = function(dt)
 {
 	var self = this;
+
+	CLerp.updateOngoingLerps(dt);
 
 	this.grid.update(dt, this.interaction);
 	this.testwindow.update(dt, self.t.time);
