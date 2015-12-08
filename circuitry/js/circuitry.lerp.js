@@ -28,7 +28,7 @@ var CLerp =
 		{
 			var lerp = this.lerps[i];
 			var ct = Math.min((self.time - lerp.st) / lerp.t, 1);
-			var lr = self._lerp2(lerp.v0, lerp.v1, ct);
+			var lr = self._easeInOutCubic(lerp.v0, lerp.v1, ct);
 
 			lerp.f(lr);
 
@@ -67,5 +67,76 @@ var CLerp =
 	_lerp2: function(v0, v1, t) 
 	{
   		return (1 - t) * v0 + t * v1;
+	},
+
+	_easeInQuad: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * (t*t) + v0; 
+	},
+
+	// decelerating to zero velocity
+	_easeOutQuad: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * (t*(2-t)) + v0; 
+	},
+
+	// acceleration until halfway, then deceleration
+	_easeInOutQuad: function (v0, v1, t) 
+	{ 
+		return t<.5 ? (v1 - v0) * (2*t*t) + v0 : (v1 - v0) * (-1+(4-2*t)*t) + v0; 
+	},
+
+	// accelerating from zero velocity 
+	_easeInCubic: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * (t*t*t) + v0; 
+	},
+
+	// decelerating to zero velocity 
+	_easeOutCubic: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * ((--t)*t*t+1) + v0;
+	},
+
+	// acceleration until halfway, then deceleration 
+	_easeInOutCubic: function (v0, v1, t) 
+	{ 
+		return t<.5 ? (v1 - v0) * (4*t*t*t) + v0 : (v1 - v0) * ((t-1)*(2*t-2)*(2*t-2)+1) + v0; 
+	},
+
+	// accelerating from zero velocity 
+	_easeInQuart: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * (t*t*t*t) + v0; 
+	},
+
+	// decelerating to zero velocity 
+	_easeOutQuart: function (v0, v1, t) 
+	{
+    	return (v1 - v0) * (1-(--t)*t*t*t) + v0;
+	},
+
+	// acceleration until halfway, then deceleration
+	_easeInOutQuart: function (v0, v1, t) 
+	{ 
+		return t<.5 ? (v1 - v0) * (8*t*t*t*t) + v0 : (v1 - v0) * (1-8*(--t)*t*t*t) + v0; 
+	},
+
+	// accelerating from zero velocity
+	_easeInQuint: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * (t*t*t*t*t) + v0; 
+	},
+
+	// decelerating to zero velocity
+	_easeOutQuint: function (v0, v1, t) 
+	{ 
+		return (v1 - v0) * (1+(--t)*t*t*t*t) + v0;
+	},
+
+	// acceleration until halfway, then deceleration 
+	_easeInOutQuint: function (v0, v1, t) 
+	{ 
+		return t<.5 ? (v1 - v0) * (16*t*t*t*t*t) + v0 : (v1 - v0) * (1+16*(--t)*t*t*t*t) + v0;
 	}
 }
