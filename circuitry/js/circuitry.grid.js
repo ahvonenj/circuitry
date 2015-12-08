@@ -12,9 +12,15 @@ function CGrid(rx, ry, $container, stage, renderer)
 	this.wy = this.$container.height() / this.ry;
 
 	this.g = new PIXI.Graphics();
+	this.sg = new PIXI.Graphics();
+
 	this.stage.addChild(this.g);
+	this.stage.addChild(this.sg);
+
+	this.needsRedraw = true;
 
 	this.selected = null;
+	this.lastSelected = null;
 }
 
 CGrid.prototype.update = function(dt, interaction)
@@ -26,6 +32,8 @@ CGrid.prototype.update = function(dt, interaction)
 
 	if(mx > 0 && my > 0)
 	{
+		self.lastSelected = self.selected;
+
 		self.selected = 
 		{
 			x: Math.floor(mx / self.wx),
@@ -34,6 +42,7 @@ CGrid.prototype.update = function(dt, interaction)
 	}
 	else
 	{
+		self.lastSelected = self.selected;
 		self.selected = null;
 	}
 }
@@ -42,26 +51,40 @@ CGrid.prototype.draw = function(dt)
 {
 	var self = this;
 
-	self.g.clear();
-
-	for(var y = 0; y < self.ry; y++)
+	if(self.needsRedraw)
 	{
-		for(var x = 0; x < self.rx; x++)
+		self.g.clear();
+
+		for(var y = 0; y < self.ry; y++)
 		{
-			self.g.lineStyle(1, 0x000000, 0.45);
-
-			if(self.selected !== null && self.selected.x === x && self.selected.y === y)
+			for(var x = 0; x < self.rx; x++)
 			{
-				self.g.beginFill(0x27a762, 1);
-			}
-			else
-			{
-				self.g.beginFill(0x1E824C, 1);
-			}
+				self.g.lineStyle(1, 0x000000, 0.45);
 
-			self.g.drawRect(self.wx * x, self.wy * y, self.wx, self.wy);
+				if(self.selected !== null && self.selected.x === x && self.selected.y === y)
+				{
+					self.g.beginFill(0x27a762, 1);
+				}
+				else
+				{
+					self.g.beginFill(0x1E824C, 1);
+				}
+
+				self.g.drawRect(self.wx * x, self.wy * y, self.wx, self.wy);
+			}
 		}
+
+		self.g.endFill();
+		self.needsRedraw = false;
 	}
 
-	self.g.endFill();
+
+	if(self.selected !== null)
+	{
+		self.sg.clear();
+		self.sg.lineStyle(1, 0x000000, 0.45);
+		self.sg.beginFill(0x27a762, 1);
+		self.sg.drawRect(self.wx * self.selected.x, self.wy * self.selected.y, self.wx, self.wy);
+		self.sg.endFill();
+	}
 }

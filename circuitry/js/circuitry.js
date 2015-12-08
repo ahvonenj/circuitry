@@ -35,6 +35,10 @@ function Circuitry($container)
 	this.interaction = this.renderer.plugins.interaction;
 
 
+	// INIT COMPONENT GRID
+	this.grid = new CGrid(30, 30, this.$container, this.stage);
+
+
 	// INIT CIRCUITRY LOGO THING
 	this.g = new PIXI.Graphics();
 	this.stage.addChild(this.g);
@@ -47,10 +51,6 @@ function Circuitry($container)
 	self.doShamefulStuff();
 
 
-	// INIT COMPONENT GRID
-	this.grid = new CGrid(50, 50, this.$container, this.stage);
-
-
 	// INIT COMPONENT WINDOW
 	this.componentwindow = new CWindow(this.stage, this._WZ.w, 0, 400, this._WZ.h, "Circuitry component window", function(w) 
 	{ 
@@ -59,7 +59,7 @@ function Circuitry($container)
 
 
 	// Z SWAP
-	this.stage.swapChildren(this.g, this.grid.g);
+	//this.stage.swapChildren(this.g, this.grid.g);
 	//this.stage.swapChildren(this.componentwindow.g, this.richText);
 
 
