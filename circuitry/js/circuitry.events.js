@@ -16,7 +16,7 @@ CEvents.prototype.keypress = function(e)
 				self.circuitry.componentwindow.isopen = true;
 				CLerp.interrupt('componentwindow_close');
 
-				CLerp.doLerp(self.circuitry.componentwindow.x, self.circuitry._WZ.w - self.circuitry.componentwindow.width, 350, function(l)
+				CLerp.doLerp(self.circuitry.componentwindow.x, self.circuitry._WZ.w - self.circuitry.componentwindow.width, 500, function(l)
 				{
 					self.circuitry.componentwindow.x = l;
 				}, 'componentwindow_open');
@@ -26,7 +26,7 @@ CEvents.prototype.keypress = function(e)
 				self.circuitry.componentwindow.isopen = false;
 				CLerp.interrupt('componentwindow_open');
 
-				CLerp.doLerp(self.circuitry.componentwindow.x, self.circuitry._WZ.w, 350, function(l)
+				CLerp.doLerp(self.circuitry.componentwindow.x, self.circuitry._WZ.w, 500, function(l)
 				{
 					self.circuitry.componentwindow.x = l;
 				}, 'componentwindow_close');
