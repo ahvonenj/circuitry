@@ -28,7 +28,7 @@ var CLerp =
 		{
 			var lerp = this.lerps[i];
 			var ct = Math.min((self.time - lerp.st) / lerp.t, 1);
-			var lr = self._easeOutQuart(lerp.v0, lerp.v1, ct);
+			var lr = self._easeInOutCubic(lerp.v0, lerp.v1, ct);
 
 			lerp.f(lr);
 
@@ -71,43 +71,43 @@ var CLerp =
 
 	_easeInQuad: function (v0, v1, t) 
 	{ 
-		return t*t; 
+		return (v1 - v0) * (t*t) + v0; 
 	},
 
 	// decelerating to zero velocity
 	_easeOutQuad: function (v0, v1, t) 
 	{ 
-		return t*(2-t); 
+		return (v1 - v0) * (t*(2-t)) + v0; 
 	},
 
 	// acceleration until halfway, then deceleration
 	_easeInOutQuad: function (v0, v1, t) 
 	{ 
-		return t<.5 ? 2*t*t : -1+(4-2*t)*t; 
+		return t<.5 ? (v1 - v0) * (2*t*t) + v0 : (v1 - v0) * (-1+(4-2*t)*t) + v0; 
 	},
 
 	// accelerating from zero velocity 
 	_easeInCubic: function (v0, v1, t) 
 	{ 
-		return t*t*t; 
+		return (v1 - v0) * (t*t*t) + v0; 
 	},
 
 	// decelerating to zero velocity 
 	_easeOutCubic: function (v0, v1, t) 
 	{ 
-		return (--t)*t*t+1;
+		return (v1 - v0) * ((--t)*t*t+1) + v0;
 	},
 
 	// acceleration until halfway, then deceleration 
 	_easeInOutCubic: function (v0, v1, t) 
 	{ 
-		return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; 
+		return t<.5 ? (v1 - v0) * (4*t*t*t) + v0 : (v1 - v0) * ((t-1)*(2*t-2)*(2*t-2)+1) + v0; 
 	},
 
 	// accelerating from zero velocity 
 	_easeInQuart: function (v0, v1, t) 
 	{ 
-		return t*t*t*t; 
+		return (v1 - v0) * (t*t*t*t) + v0; 
 	},
 
 	// decelerating to zero velocity 
@@ -119,24 +119,24 @@ var CLerp =
 	// acceleration until halfway, then deceleration
 	_easeInOutQuart: function (v0, v1, t) 
 	{ 
-		return t<.5 ? 8*t*t*t*t : 1-8*(--t)*t*t*t; 
+		return t<.5 ? (v1 - v0) * (8*t*t*t*t) + v0 : (v1 - v0) * (1-8*(--t)*t*t*t) + v0; 
 	},
 
 	// accelerating from zero velocity
 	_easeInQuint: function (v0, v1, t) 
 	{ 
-		return t*t*t*t*t; 
+		return (v1 - v0) * (t*t*t*t*t) + v0; 
 	},
 
 	// decelerating to zero velocity
 	_easeOutQuint: function (v0, v1, t) 
 	{ 
-		return 1+(--t)*t*t*t*t;
+		return (v1 - v0) * (1+(--t)*t*t*t*t) + v0;
 	},
 
 	// acceleration until halfway, then deceleration 
 	_easeInOutQuint: function (v0, v1, t) 
 	{ 
-		return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t ;
+		return t<.5 ? (v1 - v0) * (16*t*t*t*t*t) + v0 : (v1 - v0) * (1+16*(--t)*t*t*t*t) + v0;
 	}
 }
