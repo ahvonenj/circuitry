@@ -33,9 +33,11 @@ CEvents.prototype.keypress = function(e)
 			}
 			break;
 		case 'h':
-			if(self.circuitry.keyText.alpha > 0.5)
+			if(typeof self.circuitry.keyText.shown === 'undefined' || self.circuitry.keyText.shown === true)
 			{
+				self.circuitry.keyText.shown = false;
 				CLerp.interrupt('show_helptex');
+
 				CLerp.doLerp(self.circuitry.keyText.alpha, 0, 250, function(l)
 				{
 					self.circuitry.keyText.alpha = l;
@@ -43,12 +45,15 @@ CEvents.prototype.keypress = function(e)
 			}
 			else
 			{
+				self.circuitry.keyText.shown = true;
 				CLerp.interrupt('hide_helptext');
+
 				CLerp.doLerp(self.circuitry.keyText.alpha, 1, 250, function(l)
 				{
 					self.circuitry.keyText.alpha = l;
 				}, 'show_helptext');
 			}
+				
 			
 			break;
 		default:
