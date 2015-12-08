@@ -1,4 +1,4 @@
-function Circuitry($container)
+function Circuitry($container, gridwidth, gridheight)
 {
 	var self = this;
 
@@ -8,7 +8,7 @@ function Circuitry($container)
 		return false;
 	}
 
-	this.debug = true;
+	this.debug = false;
 	this.version = '0.1';
 
 	this.$container = $container;
@@ -18,6 +18,9 @@ function Circuitry($container)
 		w: this.$container.width(),
 		h: this.$container.height()
 	}
+
+	this.gridwidth = gridwidth || 100;
+	this.gridheight = gridheight || 100;
 
 	this.renderer = new PIXI.WebGLRenderer(this._WZ.w, this._WZ.h,
 	{
@@ -36,7 +39,15 @@ function Circuitry($container)
 
 
 	// INIT COMPONENT GRID
-	this.grid = new CGrid(100, 100, this.$container, this.stage);
+	this.grid = new CGrid(this.gridwidth, this.gridheight, this.$container, this.stage);
+
+
+	this.testcomponents =
+	[
+		new CComponent(40, 40, CComponentDefinition.Generator.biggenerator, 0x0000FF, self, 600),
+		new CComponent(50, 50, CComponentDefinition.Generator.biggenerator, 0x00FF00, self, 900),
+		new CComponent(60, 60, CComponentDefinition.Generator.biggenerator, 0xFF0000, self, 1200)
+	]
 
 
 	// INIT CIRCUITRY LOGO THING
@@ -110,6 +121,11 @@ Circuitry.prototype.update = function(dt)
 
 	this.grid.update(dt, this.interaction);
 	this.componentwindow.update(dt, self.t.time);
+
+	self.testcomponents.forEach(function(v, i)
+	{
+		v.update(dt, self.t.time);
+	});		
 }
 
 Circuitry.prototype.render = function(dt)
@@ -139,6 +155,11 @@ Circuitry.prototype.render = function(dt)
 		this.g.drawCircle(self.px + Math.cos(Math.cos(80) * self.t.time / 400) * -50, self.py + Math.sin(Math.sin(80) * self.t.time / 400) * -50, 25);
 		this.g.endFill();
 	}
+
+	self.testcomponents.forEach(function(v, i)
+	{
+		v.draw();
+	});		
 
 	self.renderer.render(self.stage);
 }
