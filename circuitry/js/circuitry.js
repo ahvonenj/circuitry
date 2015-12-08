@@ -36,7 +36,7 @@ function Circuitry($container)
 
 
 	// INIT COMPONENT GRID
-	this.grid = new CGrid(30, 30, this.$container, this.stage);
+	this.grid = new CGrid(100, 100, this.$container, this.stage);
 
 
 	// INIT CIRCUITRY LOGO THING
