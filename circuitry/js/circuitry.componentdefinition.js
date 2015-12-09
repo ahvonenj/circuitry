@@ -52,3 +52,26 @@ var CComponentDefinition =
 
 	}
 }
+
+/*
+
+setInterval(function()
+{
+	for(var k in circuitry.testcomponents)
+	{
+		var m = circuitry.testcomponents[k].type.gridmodel;
+
+		for(var y = 0; y < m.length; y++)
+		{
+			for(var x = 0; x < m[y].length; x++)
+			{
+				var idx = m[y][x];
+
+				circuitry.testcomponents[k].type.gridmodel[y][x] = (idx === 1) ? 0 : 1;
+			}
+		}
+	}
+}, 500);
+
+
+*/
