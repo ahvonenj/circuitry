@@ -2,6 +2,20 @@ var CComponentDefinition =
 {
 	Generator:
 	{
+		tinygenerator:
+		{
+			id: 'generator_tiny',
+
+			gridmodel:
+			[
+				[1, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0]
+			]
+		},
+
 		smallgenerator:
 		{
 			id: 'generator_small',
@@ -22,9 +36,9 @@ var CComponentDefinition =
 
 			gridmodel:
 			[
-				[1, 1, 0, 0, 0],
-				[1, 1, 0, 0, 0],
-				[0, 0, 0, 0, 0],
+				[1, 1, 1, 0, 0],
+				[1, 1, 1, 0, 0],
+				[1, 1, 1, 0, 0],
 				[0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0]
 			]
