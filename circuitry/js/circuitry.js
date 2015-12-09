@@ -46,9 +46,9 @@ function Circuitry($container, gridwidth, gridheight)
 
 	this.testcomponents =
 	[
-		new CComponent(0, 0, CComponentDefinition.Generator.biggenerator, 0x0000FF, self, 600),
-		new CComponent(5, 5, CComponentDefinition.Generator.biggenerator, 0x00FF00, self, 900),
-		new CComponent(10, 10, CComponentDefinition.Generator.biggenerator, 0xFF0000, self, 1200)
+		new CComponent(20, 20, CComponentDefinition.Generator.smallgenerator, 0x0000FF, self, 600),
+		new CComponent(30, 30, CComponentDefinition.Generator.mediumgenerator, 0x00FF00, self, 900),
+		new CComponent(40, 40, CComponentDefinition.Generator.biggenerator, 0xFF0000, self, 1200)
 	]
 
 

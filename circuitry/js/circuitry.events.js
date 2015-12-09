@@ -70,11 +70,12 @@ CEvents.prototype.mouseup = function(e)
 
 	self.ismousedown = false;
 
-	self.draggedobject.dragstartx = null;
-	self.draggedobject.dragstarty = null;
-	self.draggedobject = null;
-
-	console.log(self);
+	if(self.draggedobject !== null)
+	{
+		self.draggedobject.dragstartx = null;
+		self.draggedobject.dragstarty = null;
+		self.draggedobject = null;
+	}
 }
 
 CEvents.prototype.mousedown = function(e)
@@ -96,7 +97,7 @@ CEvents.prototype.handleInput = function()
 
 	if(self.draggedobject !== null)
 	{
-		self.draggedobject.x = mx - self.draggedobject.dragstartx;
-		self.draggedobject.y = my - self.draggedobject.dragstarty;
+		self.draggedobject.x = Math.floor((mx / self.circuitry.grid.wx) - (self.draggedobject.dragstartx / self.circuitry.grid.wx)) * self.circuitry.grid.wx;
+		self.draggedobject.y = Math.floor((my / self.circuitry.grid.wy) - (self.draggedobject.dragstarty / self.circuitry.grid.wy)) * self.circuitry.grid.wy;
 	}
 }

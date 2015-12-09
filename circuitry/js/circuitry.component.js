@@ -37,11 +37,11 @@ function CComponent(x, y, type, color, circuitryref, test)
 
 	this.p.mousedown = function(e)
 	{
-		if(self.events.draggedobject === null && !self.dragged)
+		if(self.events.draggedobject === null)
 		{
 			self.events.draggedobject = self;
 			self.dragstartx = self.circuitryref.interaction.mouse.global.x - self.x;
-			self.dragstarty = self.circuitryref.interaction.mouse.global.y - self.x;
+			self.dragstarty = self.circuitryref.interaction.mouse.global.y - self.y;
 		}
 	}
 }
