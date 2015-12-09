@@ -19,8 +19,8 @@ function Circuitry($container, gridwidth, gridheight)
 		h: this.$container.height()
 	}
 
-	this.gridwidth = gridwidth || 100;
-	this.gridheight = gridheight || 100;
+	this.gridwidth = gridwidth || 80;
+	this.gridheight = gridheight || 80;
 
 	this.renderer = new PIXI.WebGLRenderer(this._WZ.w, this._WZ.h,
 	{
@@ -36,6 +36,8 @@ function Circuitry($container, gridwidth, gridheight)
 
 	// INTERACTION
 	this.interaction = this.renderer.plugins.interaction;
+	this.events = new CEvents(this);
+	this.bindKeys();
 
 
 	// INIT COMPONENT GRID
@@ -44,9 +46,9 @@ function Circuitry($container, gridwidth, gridheight)
 
 	this.testcomponents =
 	[
-		new CComponent(40, 40, CComponentDefinition.Generator.biggenerator, 0x0000FF, self, 600),
-		new CComponent(50, 50, CComponentDefinition.Generator.biggenerator, 0x00FF00, self, 900),
-		new CComponent(60, 60, CComponentDefinition.Generator.biggenerator, 0xFF0000, self, 1200)
+		new CComponent(20, 20, CComponentDefinition.Generator.smallgenerator, 0x0000FF, self, 600),
+		new CComponent(30, 30, CComponentDefinition.Generator.mediumgenerator, 0x00FF00, self, 900),
+		new CComponent(40, 40, CComponentDefinition.Generator.biggenerator, 0xFF0000, self, 1200)
 	]
 
 
@@ -84,9 +86,6 @@ function Circuitry($container, gridwidth, gridheight)
 		time: 0
 	}
 
-	this.events = new CEvents(this);
-	this.bindKeys();
-
 	this.step();
 	return this;
 }
@@ -121,6 +120,8 @@ Circuitry.prototype.update = function(dt)
 
 	this.grid.update(dt, this.interaction);
 	this.componentwindow.update(dt, self.t.time);
+
+	this.events.handleInput();
 
 	self.testcomponents.forEach(function(v, i)
 	{
@@ -166,7 +167,10 @@ Circuitry.prototype.render = function(dt)
 
 Circuitry.prototype.bindKeys = function()
 {
-	window.addEventListener('keypress', this.events.keypress);
+	window.addEventListener('keypress', this.events.keypress.bind(this.events));
+	window.addEventListener('mouseup', this.events.mouseup.bind(this.events));
+	window.addEventListener('mousedown', this.events.mousedown.bind(this.events));
+	//window.addEventListener('keypress', this.events.keypress);
 }
 
 Circuitry.prototype.doShamefulStuff = function()

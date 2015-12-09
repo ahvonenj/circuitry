@@ -1,6 +1,9 @@
 function CEvents(circuitry)
 {
 	this.circuitry = circuitry;
+
+	this.draggedobject = null;
+	this.ismousedown = false;
 }
 
 CEvents.prototype.keypress = function(e)
@@ -58,5 +61,43 @@ CEvents.prototype.keypress = function(e)
 			break;
 		default:
 			break;
+	}
+}
+
+CEvents.prototype.mouseup = function(e)
+{
+	var self = this;
+
+	self.ismousedown = false;
+
+	if(self.draggedobject !== null)
+	{
+		self.draggedobject.dragstartx = null;
+		self.draggedobject.dragstarty = null;
+		self.draggedobject = null;
+	}
+}
+
+CEvents.prototype.mousedown = function(e)
+{
+	var self = this;
+
+}
+
+CEvents.prototype.mousemove = function(e)
+{
+
+}
+
+CEvents.prototype.handleInput = function()
+{
+	var self = this;
+	var mx = self.circuitry.interaction.mouse.global.x;
+	var my = self.circuitry.interaction.mouse.global.y;
+
+	if(self.draggedobject !== null)
+	{
+		self.draggedobject.x = Math.floor((mx / self.circuitry.grid.wx) - (self.draggedobject.dragstartx / self.circuitry.grid.wx)) * self.circuitry.grid.wx;
+		self.draggedobject.y = Math.floor((my / self.circuitry.grid.wy) - (self.draggedobject.dragstarty / self.circuitry.grid.wy)) * self.circuitry.grid.wy;
 	}
 }
